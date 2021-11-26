@@ -1567,8 +1567,8 @@ PlayerPreThink =
 
 	}
 
-	if (self.aqstate & AQS_MENU_MASK && time > self.count)
-		aq_menu_print ();
+	//if (self.aqstate & AQS_MENU_MASK && time > self.count)
+	//	aq_menu_print ();
 
 	if (self.waitmax)
 	{
@@ -1899,7 +1899,7 @@ PlayerPostThink =
 	if (is_observer ())
 	{
 		
-		obs_post_think ();
+		//obs_post_think ();
 		obs_join_game (self.aqflags & AQ_ADMIN);
 		return;
 	}
