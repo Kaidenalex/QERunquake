@@ -432,7 +432,7 @@ player_console_init_level_alias =
 	{
 		localcmd ("alias ");
 		localcmd (level);
-		localcmd (" \"IN_QW(serverinfo )");
+		//localcmd (" \"IN_QW(serverinfo )");
 		localcmd (CVAR_C1);
 		localcmd (" ");
 		s = ftos (imp);
@@ -486,7 +486,7 @@ console_init_cvar_alias =
 	s = ftos (imp);
 	localcmd ("alias ");
 	localcmd (cmd);
-	localcmd (" \"IN_QW(serverinfo )");
+	//localcmd (" \"IN_QW(serverinfo )");
 	localcmd (cvr);
 	localcmd (" ");
 	localcmd (s);

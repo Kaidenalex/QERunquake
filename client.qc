@@ -845,7 +845,9 @@ PutClientInServer =
 	else
 		newplayer = 0;
 	if (newplayer || is_observer())
+	{
 		spawn_as_observer = 1;
+	}
 	else
 	{
 		if (gamemode & MODE_ARENA)
@@ -878,6 +880,7 @@ PutClientInServer =
 		self.aqflags = self.aqflags | AQ_INIT_DONE | AQ_NO_HUD;
 		self.rqflags = self.rqflags | RQ_CYCLE_ALTERNATES;
 		player_init_spawn ();
+
 	}
 	else if (!(self.rqflags & RQ_BINDINGS_RECEIVED))
 	{
@@ -915,6 +918,8 @@ PutClientInServer =
 			else
 				remove (spot);
 		}
+		
+		
 	}
 	else
 	{
@@ -1893,7 +1898,9 @@ PlayerPostThink =
 	}
 	if (is_observer ())
 	{
+		
 		obs_post_think ();
+		obs_join_game (self.aqflags & AQ_ADMIN);
 		return;
 	}
 

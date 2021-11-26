@@ -644,7 +644,7 @@ T_Damage =
 								attacker);
 			}
 
-			if (!(options & NO_DROP_ON_DEATH
+			if (!(options & NO_DROP_ON_DEATH)
 
 				// I disabled the bomb just because of
 				// the exploding aspect.  There's a good
@@ -662,7 +662,7 @@ T_Damage =
 				// death spots, if they then drop it you
 				// get huge concentrations of death
 				// spots.
-					&& targ.runetype != RN_DSPOTS))
+					&& targ.runetype != RN_DSPOTS)
 
 				Rune_Spawn (targ.origin, 0, 0, 0, targ.runetype, targ, attacker);
 		}
