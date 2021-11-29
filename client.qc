@@ -325,7 +325,7 @@ GotoNextMap =
 	else if (cvar ("samelevel") & 1)	// if samelevel is set, stay on same level
 		changelevel (mapname);
 	else
-	changelevel (mapname);
+	changelevel (nextmap);
 };
 
 /*
@@ -353,8 +353,10 @@ IntermissionThink =
 	if (time < intermission_exittime)
 		return;
 
-	if (self.button0 || self.button2)
-		GotoNextMap ();
+	if (!self.button0 && !self.button1 && !self.button2)
+		return;
+		
+	GotoNextMap ();
 };
 
 // XXX People who connect during intermission don't get their angles set.
@@ -450,6 +452,7 @@ changelevel_touch =
 	if (other.classname != "player")
 		return;
 
+/*
 	if ((noexit & NOEXIT_NO_EXITING || noexit == 2)
 			&& (mapname != "start"
 				|| ! (noexit & NOEXIT_ALLOW_EXITING_START)))
@@ -464,6 +467,20 @@ changelevel_touch =
 		bprint (other.netname);
 		bprint (" exited the level\n");
 	}
+*/
+	if (coop || deathmatch)//R00k
+	{	//To do, noexit 3 = teleport them back to the beginning of the map?
+		if ((cvar("noexit") == 1) || ((cvar("noexit") == 2) && (mapname != "start")))
+		{
+			if ((cvar("noexit") == 2))	//R00k: noexit 2 to obliterate players
+				T_Damage (other, self, self, 50000,string_null);
+			return;
+		}
+		gameover = TRUE;
+		bprint (other.netname);
+		bprint (" exited the level\n");
+	}
+
 
 	nextmap = self.map;
 	// If the DM levels don't loop and the user chose the end
