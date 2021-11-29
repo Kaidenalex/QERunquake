@@ -84,8 +84,8 @@ aq_menu_print_n =
 	if (m == AQS_MENU_SPLASH)
 	{
 		centerprint7 (self,
-			"Type 1 for the menu,\n"
-			"2 to start playing\n\n"
+			"Impulse 100 uses a rune, Impulse 98 deletes a rune, \n If your on PC you can use impulse 76 to bind as your hook.\n"
+			"If you are on console: Go into your input and customize binds\n Laser Cannon = Use Rune & Mjolnir = Delete Rune.\n"
 			"Rune Quake\n"
 			"Version ", version, "\n\n",
 			SPLASH_1, SPLASH_2, SPLASH_3, SPLASH_4);

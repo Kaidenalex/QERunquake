@@ -1388,13 +1388,13 @@ ImpulseCommands =
 			Rune_Activate (wanted, 1);
 	}
 
-	else if (self.impulse == IMP_RUNE_USE)
+	else if ((self.impulse == IMP_RUNE_USE) || (self.impulse == 225))
 		Rune_Button ();
 
 	else if (self.impulse == IMP_RUNE_TELL)
 		rune_tell_toggle (0, self);
 
-	else if (self.impulse == IMP_RUNE_DELETE)
+	else if ((self.impulse == IMP_RUNE_DELETE) || (self.impulse == 226))
 	{
 		if (self.runetype == 0)
 		{

@@ -180,7 +180,7 @@ centerprint7 =
 			if (e.waitmax > 0)
 				e.waitmax = time + CENTERPRINT_TIME;
 			else
-				e.waitmax = 0;
+				e.waitmax = time + CENTERPRINT_TIME;
 		}
 	}
 

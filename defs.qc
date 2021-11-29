@@ -869,7 +869,7 @@ float ITEM_POWERUP_ANY		= 15;
 float SERVERFLAGS_RUNE_MASK	= 15;
 vector PLAYER_WEAPON_OFFSET	= '0 0 16';
 vector PLAYER_VIEW_OFFSET	= '0 0 22';
-float CENTERPRINT_TIME		= 2;		// default scr_centertime
+float CENTERPRINT_TIME		= 8;		// default scr_centertime
 float CENTERPRINT_REFRESH	= 1.5;		// a little less
 
 // attenuations used by T_RadiusDamage()
