@@ -82,3 +82,5 @@ zombie.qc
 //nomonster shalrath.qc		// registered
 //nomonster enforcer.qc		// registered
 //nomonster oldone.qc		// registered
+
+addon_mapcycler.qc  //JPS map cycler 
