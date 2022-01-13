@@ -190,12 +190,12 @@ player_bindings_think =
 			if (gamemode == MODE_ARENA)
 			{
 				self_sprint (self, "\nDon't have the arena maps?\n");
-				self_sprint (self, "\nDownload from\n\n\b    runequake.com/maps/ramaps.zip\b\n\n");
+				self_sprint (self, "\nDownload from\n\n\b    .com/maps/ramaps.zip\b\n\n");
 			}
 			else
 			{
 				self_sprint (self, "\nDon't have the map?\n");
-				self_sprint (self, "\nDownload from\n\n\b    ftp.runequake.com/quake/maps/\b\n\nFilename: ");
+				self_sprint (self, "\nDownload from\n\n\b    ftp..com/quake/maps/\b\n\nFilename: ");
 				self_sprint (self, mapname);
 				self_sprint (self, ".zip\n");
 			}
@@ -1577,9 +1577,9 @@ help_temp1 =
 {
 	local float i, t1;
 
-	t1 = cvar_infokey ("saved4");
+	t1 = cvar_infokey ("temp1");
 
-	self_sprint (self, "saved4 = "); self_sprint_float (self, (t1));
+	self_sprint (self, "temp1 = "); self_sprint_float (self, (t1));
 	self_sprint (self, "\n");
 
 	self_sprint (self, "\n     1-63 number of runes               "); self_sprint_float (self, t1 & T1_NRUNES_MASK);

@@ -34,7 +34,7 @@ types		:= poq qw
 type		:= xxx # overridden by target-specific value
 
 dir_poq		:= ../poq
-dir_shamck_poq	:= runequake
+dir_shamck_poq	:= 
 progs_poq	:= ../progs.dat
 progs_poq_ts	:= $(progs_poq).ts
 src_m4_poq	:= $(addprefix $(dir_poq)/,$(src_m4))
@@ -64,10 +64,10 @@ M4		:= m4
 M4FLAGS		:= --prefix-builtins
 
 base_files	:=  Changes Configuring Copying Playing \
-			example.cfg gnu.txt runequake.qst
+			example.cfg gnu.txt .qst
 base_files_src	:= Notes
 
-dist_version	:= runequake-$(shell \
+dist_version	:= -$(shell \
 			perl -ne 'print $$1 if /version\s*=\s*"(.*?)";/' \
 				version.qc)
 dist_noversion	:= runes
@@ -152,7 +152,7 @@ $(progs_all):
 	    qccx /O2; cp -p settings.qc.real settings.qc && exit $$ret
     # XXX fastqcc umask bug
 	chmod o-w $@
-	[ ! -d $$HOME/quake/runequake ] || cp $@ $$HOME/quake/runequake
+	[ ! -d $$HOME/quake/ ] || cp $@ $$HOME/quake/
 
 # XXX This hasn't been updated since QW changes.
 

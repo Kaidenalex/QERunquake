@@ -536,7 +536,7 @@ process_cvars =
 	else
 		FORWARD_MAX_PLAYERS_REAL = FORWARD_MAX_PLAYERS;
 
-	temp1 = cvar_infokey ("saved4");
+	temp1 = cvar_infokey ("temp1");
 
 	set_runemax ();
 
