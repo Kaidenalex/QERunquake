@@ -1151,7 +1151,7 @@ float	skill;
 string	CVAR_C1	= "saved1";	// levels
 string	CVAR_C2	= "saved2";	// console commands
 string	CVAR_C3	= "saved4";	// game mode
-string	CVAR_C4 = "temp2";	// options
+string	CVAR_C4 = "saved3";	// options
 string	CVAR_C5 = "temp3";	// options2
 string	CVAR_C6 = "temp4";	// storage
 
