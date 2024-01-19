@@ -353,8 +353,8 @@ IntermissionThink =
 	if (time < intermission_exittime)
 		return;
 
-	if (!self.button0 && !self.button1 && !self.button2)
-		return;
+	if ((time < intermission_exittime+5) && !self.button0 && !self.button1 && !self.button2)
+        return;
 		
 	GotoNextMap ();
 };
@@ -619,8 +619,8 @@ ClientKill =
 	self.health = 0;
 	Killed (self, self, dt);
 
-	if (dt == "suicide")
-		kick_suicider ();
+	//if (dt == "suicide")
+		//kick_suicider ();
 };
 
 /*
