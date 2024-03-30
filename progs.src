@@ -2,7 +2,8 @@
 
 defs.qc
 settings.qc
-subs.qc 
+mathlib.qc
+subs.qc
 maps.qc	//custom map names
 func.qc
 internal.qc
@@ -29,6 +30,7 @@ runes30.qc
 runes40.qc
 runes50.qc
 runes60.qc
+runes70.qc
 runeserv.qc
 
 admin.qc
@@ -83,4 +85,4 @@ zombie.qc
 //nomonster enforcer.qc		// registered
 //nomonster oldone.qc		// registered
 
-addon_mapcycler.qc  //JPS map cycler 
+addon_mapcycler.qc  //JPS map cycler

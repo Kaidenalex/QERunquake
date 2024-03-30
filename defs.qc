@@ -407,6 +407,13 @@ string forced_nextmap;
 .float recent_frags;
 float update_frag_rates_time;
 
+//  disc mods
+.entity mydisc;
+.float discfired;
+.float bounced;
+.float disccount;
+.float disclanded;
+
 // If the map is custom, send message to players about downloading maps.
 float MAP_IS_CUSTOM;
 
