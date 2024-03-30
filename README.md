@@ -5,15 +5,19 @@ Quake Enhanced RuneQuake mod
 
 Good ole RuneQuake. This was modified to work with QE but pretty much the same version. The one I used was version 1.4.21. I am not the original author.
 
-# How to install
-Go to your 'Saved games' quake folder, NOT THE STEAM FOLDER. You can go to it by pressing Windows+R and typing: %userprofile%\Saved Games\Nightdive Studios\Quake\Id1
-Create a folder called 'id1'
-Create another folder and call it 'mpmod'. If you already have this folder, skip this step.
-Extract zip into the 'id1' folder you created on step 2. If you already have an 'id1' folder, it's likely from another mod. Unfortunately, you'll have to replace it.
-How to run the mod
-Open console and type 'game mpmod'
-Start a multiplayer game
-Technical explanation
+### How to install
+* Go to your 'Saved games' quake folder, NOT THE STEAM FOLDER. You can go to it by pressing Windows+R and typing: %userprofile%\Saved Games\Nightdive Studios\Quake\Id1
+* Create a folder called 'id1'
+* Create another folder and call it 'mpmod'. If you already have this folder, skip this step.
+* Extract zip into the 'id1' folder you created on step 2. If you already have an 'id1' folder, it's likely from another mod. Unfortunately, you'll have to replace it.
+
+### How to run the mod
+
+* Open console and type 'game mpmod'
+* Start a multiplayer game
+
+### Technical explanation
+
 When you change to mpmod, it sets the root folder to be Saved Games, so next time the game goes into id1 it will use the files from Saved Games and override.
 
 
@@ -21,6 +25,7 @@ When you change to mpmod, it sets the root folder to be Saved Games, so next tim
 
 
 # saved3
+```
 //
 //      1 no exiting                            NOEXIT_NO_EXITING
 //      2 allow exiting start level             NOEXIT_ALLOW_EXITING_START
@@ -40,9 +45,12 @@ When you change to mpmod, it sets the root folder to be Saved Games, so next tim
 // number of players. Loop back of dm1 after dm6 is turned off.
 //
 // 1 + 4  + 8 + 32 + 1024
+
 saved3 1069
+```
 
 # saved4
+```
 //
 //     1-63 number of runes                     T1_NRUNES_MASK
 //       64 rune selection by impulse           T1_RUNE_CHEAT
@@ -68,9 +76,10 @@ saved3 1069
 // no drop delay, and free hook.
 
 saved4 200255
-
+```
 
 # scratch1
+```
 //
 //    1 equalize all lightstyles               S1_EQUALIZE_LIGHTSTYLE
 //    2 disable all ambient sounds             S1_AMBIENT_SOUND_OFF
@@ -91,6 +100,7 @@ saved4 200255
 // static lights, and use custom exist.`
 // 1 + 2 + 4 + 128
 scratch1 135
+```
 
 Credits
 Original Author of quake: Slot Zero
