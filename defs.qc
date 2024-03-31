@@ -407,12 +407,14 @@ string forced_nextmap;
 .float recent_frags;
 float update_frag_rates_time;
 
-//  disc mods
+// shootingstar mods
 .entity mydisc;
 .float discfired;
 .float bounced;
 .float disccount;
 .float disclanded;
+.float lastdmgtime;
+.vector lastknownvelocity;
 
 // If the map is custom, send message to players about downloading maps.
 float MAP_IS_CUSTOM;
@@ -1699,3 +1701,4 @@ entity	last_teleport;
 // development
 float	gamemode_set;
 float	console_warp;
+

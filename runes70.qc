@@ -1,5 +1,5 @@
 // Constants
-float PROJECTILE_SPEED = 1000;
+float PROJECTILE_SPEED = 400;
 float PROJECTILE_DAMAGE = 100;
 float PROJECTILE_RADIUS = 100;
 
@@ -28,15 +28,15 @@ void() ProjectileThink;
 
 void RemoveProjectile()
 {
-  self_sprint(self.owner, "RemoveProjectile()\n");
-  sound (self.owner,CHAN_WEAPON,"weapons/lock4.wav",1,ATTN_NORM);
+  // self_sprint(self.owner, "RemoveProjectile()\n");
+  // sound (self.owner,CHAN_WEAPON,"weapons/lock4.wav",1,ATTN_NORM);
 
   if ( (self.owner.classname == "player") )
   {
     sprint (self.owner,"Your Shooting Star has burned out\n");
   }
 
-  T_RadiusDamage (RADIUS_NORMAL, self, self.owner, 100, other, "disc");
+  T_RadiusDamage (RADIUS_NORMAL, self, self.owner, 50, other, "shootingstar");
 
   self.origin = self.origin - 8 * normalize(self.velocity);
 
@@ -97,10 +97,10 @@ void() ProjectileTouch = {
 
       vector newDir = NewDirection(trace_plane_normal);
       self.velocity = newDir * PROJECTILE_SPEED;
-      self.velocity = self.velocity * (self.bounced * 5);
-      self_sprint(self.owner, "SPEED: ");
-      self_sprint(self.owner, ftos(self.speed));
-      self_sprint(self.owner, "\n");
+      self.velocity = self.velocity * (self.bounced * 1.1);
+      // self_sprint(self.owner, "SPEED: ");
+      // self_sprint(self.owner, ftos(self.speed));
+      // self_sprint(self.owner, "\n");
       // self.velocity = self.velocity * (1.38 * self.bounced);
       // self.speed = self.speed * 5; // Increase speed<<
       // self.speed = self.speed * (self.bounced * 5); // Increase speed<<
@@ -122,15 +122,56 @@ void() ProjectileTouch = {
 
     // if (trace_plane_normal == '0 0 1') {
     //   self_sprint(self.owner, "FLOOR OMG FLOOR\n");
+
     // }
+
+    if(other.takedamage)
+    {
+      // self_sprint(self.owner, "other.takedamage\n");
+      // dam = (50 + (fabs ((self.velocity_x * 0.013)) + fabs ((self.velocity_y * 0.013))));
+      T_Damage (other,self,self.owner,1000, "shootingstar");
+    }
+    if ( (random () < 0.5) )
+    {
+      sound (self,CHAN_WEAPON,"player/axhit2.wav",1,ATTN_NORM);
+    }
+    else
+    {
+      sound (self,CHAN_WEAPON,"weapons/tink1.wav",1,ATTN_NORM);
+    }
+    self.lastknownvelocity = self.velocity;
 
     self.think = ProjectileThink;
     self.nextthink = 0.1;
 };
 
 void() ProjectileThink = {
+// void (float attn, entity inflictor, entity attacker, float damage, entity ignore, string dtype)
+// T_RadiusDamage
+  // T_RadiusDamage (RADIUS_150, self, self.owner,20,self.owner, "shootingstar");
+
+  if(self.runetime < time) {
+    RemoveProjectile();
+    return;
+  }
+
+  if(self.owner.health <= 0) {
+    RemoveProjectile();
+    return;
+  }
+
+  if(self.lastdmgtime + 0.45 < time) {
+    // T_RadiusDamage (RADIUS_NORMAL, self, self.owner,80,self.owner, "shootingstar");
+    T_RadiusDamage (RADIUS_150, self, self.owner,20,self.owner, "shootingstar");
+    self.lastdmgtime = time;
+  }
+  // T_RadiusDamage (RADIUS_150, self, self.owner,5,self.owner, "shootingstar");
+
   local vector start, end;
 
+    // sprint (self.owner,"last known:");
+    // sprint (self.owner,vtos(self.lastknownvelocity));
+    // sprint (self.owner,"\n");
 
   // if ( ((self.attack_finished < time) || (self.bounced >= 20)) )
   // {
@@ -169,7 +210,7 @@ void() ProjectileThink = {
   // if (self.disclanded) {
   if (self.flags & FL_ONGROUND == FL_ONGROUND) {
     self.flags = self.flags - FL_ONGROUND;
-    self_sprint(self.owner, "we've landed.. weird\n");
+    // self_sprint(self.owner, "we've landed.. weird\n");
     // self.movetype = MOVETYPE_BOUNCE;
     vector upDir = '0 0 1'; // Straight up direction
 
@@ -179,7 +220,40 @@ void() ProjectileThink = {
     // Combine the upward direction with the random 45-degree direction
     newDir = normalize(newDir + upDir);
 
-    self.velocity = newDir * 1000; // Reset speed to initial value
+
+    // self.velocity = newDir * 1000;
+    // self.velocity = newDir * (self.bounced * 5);
+
+    self.velocity = newDir * PROJECTILE_SPEED;
+    self.velocity = self.velocity * (self.bounced * 1.1);
+
+
+    // float oldvelocity = 1000; // DEFAULT
+
+    // if(self.lastknownvelocity_x != 0) {
+    //   oldvelocity = self.lastknownvelocity_x;
+    // } else if (self.lastknownvelocity_y != 0) {
+    //   oldvelocity = self.lastknownvelocity_y;
+    // } else {
+    //   oldvelocity = self.lastknownvelocity_z;
+    // }
+    // sprint (self.owner,"last known:");
+    // sprint (self.owner,vtos(self.lastknownvelocity));
+    // sprint (self.owner,"\n");
+
+    // sprint (self.owner,"old velocity:");
+    // sprint (self.owner,ftos(oldvelocity));
+    // sprint (self.owner,"\n");
+
+        //  self.velocity = '0 0 1' * (lastVelocity * '0 0 1'); // Set upward velocity based on last known velocity
+    // self.velocity = newDir * oldvelocity; // Reset speed to initial value
+
+
+    // self.velocity = self.velocity * (self.lastknownvelocity * '0 0 1') * (self.bounced * 5);
+
+    // self.velocity = self.lastknownvelocity;
+
+
     // self.speed = self.bounced * 5; // Increase speed<<
     // self.speed = 1000; // Reset speed to initial value
     // self.disclanded = FALSE;
@@ -187,6 +261,7 @@ void() ProjectileThink = {
 
         //     self.velocity = '0 0 1' * 1000; // Set velocity to straight up
         // self.speed = 1000; // Reset speed to initial value
+    self.nextthink = 0.1;
   }
 
   // }
@@ -214,6 +289,7 @@ void() ProjectileThink = {
 // void() ShootingStar  = {
 void ShootingStar() = {
   local entity missile;
+  local entity glowEffect;
   local entity mpuff;
   local vector start;
   local vector finish;
@@ -274,5 +350,18 @@ void ShootingStar() = {
   setmodel (missile,"progs/lavaball.mdl");
   setsize (missile,'0.000 0.000 0.000','0.000 0.000 0.000');
   setorigin (missile,((self.origin + (v_forward * 8.000)) + '0.000 0.000 16.000'));
+  missile.lastknownvelocity = missile.velocity;
+
+    // // Spawn glow effect entity
+    // glowEffect = spawn();
+    // glowEffect.movetype = MOVETYPE_NOCLIP;
+    // glowEffect.solid = SOLID_NOT;
+    // glowEffect.effects = EF_SPHERETRANSLUCENT; // Set the desired glow effect
+    // glowEffect.scale = GLOW_RADIUS; // Set the glow radius
+
+    // missile.glowEffect = glowEffect; // Attach the glow effect to the projectilekk
+  missile.effects = missile.effects & EF_MUZZLEFLASH;
+  missile.lastdmgtime = time;
+  missile.runetime = time + 5; // Destroy self after 5 seconds;
 };
 

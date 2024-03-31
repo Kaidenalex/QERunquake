@@ -355,7 +355,7 @@ IntermissionThink =
 
 	if ((time < intermission_exittime+5) && !self.button0 && !self.button1 && !self.button2)
         return;
-		
+
 	GotoNextMap ();
 };
 
@@ -935,8 +935,8 @@ PutClientInServer =
 			else
 				remove (spot);
 		}
-		
-		
+
+
 	}
 	else
 	{
@@ -1579,7 +1579,7 @@ PlayerPreThink =
 			teamscores_on (self);
 
 
-		
+
 
 
 	}
@@ -1915,7 +1915,7 @@ PlayerPostThink =
 	}
 	if (is_observer ())
 	{
-		
+
 		//obs_post_think ();
 		obs_join_game (self.aqflags & AQ_ADMIN);
 		return;
@@ -1972,7 +1972,7 @@ called when a player connects to a server
 */
 void ()
 ClientConnect =
-{			
+{
 
 		//bprint (self.netname);
 		//bprint (" connected to the server");
@@ -2586,6 +2586,11 @@ ClientObituary =
 		{
 			s1 = " accepts ";
 			s2 = "'s shaft\n";
+		}
+		else if (dt == "shootingstar")
+		{
+			s1 = " was obliterated by ";
+			s2 = "'s shooting star\n";
 		}
 		else
 		{
