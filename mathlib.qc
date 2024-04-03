@@ -241,11 +241,11 @@ mathlib_anglemod
 
 faster version of id's anglemod
 -----------------------------------------
-float(float v) anglemod =
+*/
+float(float v) mathlib_anglemod =
 {
   return v - floor(v/360) * 360;
 };
-*/
 
 /*
 -----------------------------------------
