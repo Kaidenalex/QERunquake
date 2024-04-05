@@ -540,6 +540,13 @@ trigger_changelevel =
 void ()
 respawn =
 {
+	// if(self.classname == "player") {
+	// 	bprint(self.netname);
+	// 	bprint(" has respawned.\n");
+	// }
+	if(darkcount > 0) {
+		flash_on(self);
+	}
 	if (gamemode == MODE_HEADS)
 	{
 		if (self.runetype == RN_PHOENIX && self.runevar > 0)
@@ -618,6 +625,21 @@ ClientKill =
 	see_damage (self, self, self.health + self.armorvalue);
 	self.health = 0;
 	Killed (self, self, dt);
+
+     //  Rune of Darkness
+     if ((self.runetype == RN_DARK) && (self.runevar > 0))
+     {
+       Lights_on();
+       if (self.flash_flag == TRUE)
+         //  ************************************************************************
+         //  mod for flashlight
+         //  turn off flashlight
+       {
+         self.flash_flag = FALSE;
+         self.flash.think = SUB_Remove;
+       }
+       //  ************************************************************************
+     }
 
 	//if (dt == "suicide")
 		//kick_suicider ();
@@ -2066,6 +2088,11 @@ ClientDisconnect =
 	obs_process_game_queue ();
 	lose_riders ();
 	setmodel (self, string_null);
+	if ((self.runetype == RN_DARK) && (self.runevar >0)) {
+		Lights_on();
+		self.flash_flag = FALSE;
+		self.flash.think = SUB_Remove;
+	}
 
 };
 
@@ -2088,6 +2115,19 @@ ClientObituary =
 
 	if (targ.classname != "player")
 		return;
+
+	if (targ.runetype == RN_DARK)
+	{
+		if (targ.runevar > 0)
+		{
+			Lights_on();
+			if (targ.flash_flag == TRUE)
+			{
+				flash_off(targ);
+			}
+		}
+	}
+
 
 	mm = gamemode == MODE_MATCH;
 	if (mm)
@@ -2204,8 +2244,11 @@ ClientObituary =
 			f = -1;
 			bprint (targ.netname);
 
-			if (dt == "suicide")
+			if (dt == "suicide") {
 				bprint (" suicides\n");
+				traceon();
+
+			}
 			else if (dt == "trapavoid")
 				bprint (" suicides to avoid a trap\n");
 			else if (dt == "kamiself")

@@ -37,6 +37,7 @@ Rune_Think =
 	else if (self.runetype == RN_JACK)		jack_think ();
 	else if (self.runetype == RN_BLIZZARD)		Blizzard_Think ();
 	else if (self.runetype == RN_THOR)		Rune_Thor ();
+	else if (self.runetype == RN_DARK) 		Dark_Think();
 };
 
 void ()
@@ -88,6 +89,8 @@ Rune_Button =
 	else if (self.runetype == RN_ANTIPACK)		Rune_AntiPack ();
 	else if (self.runetype == RN_BETTY)		Rune_Betty ();
 	else if (self.runetype == RN_TORNADO)		Rune_Tornado ();
+	else if (self.runetype == RN_DARK) 		Rune_Dark();
+
 };
 
 // This doesn't always tell the riders because it can be triggered both
@@ -624,6 +627,15 @@ Rune_Tell_real =
 			"use with axe toggle or +hook\n"
 			"or hook-on or hook-toggle";
 	}
+	else if (type == RN_DARK)
+	{
+		desc_l = "Rune of Darkness";
+		desc_s = " RnDrk";
+
+		d1 = "Turns the entire world dark\n"
+			"for a short period of time.\n"
+			"Flashlight provided.";
+	}
 	else
 	{
 		desc_l = "Invalid Rune";
@@ -706,6 +718,7 @@ string (float ix) Rune_Model;
 void (float type, float tell)
 Rune_Activate =
 {
+	self_sprint(self, "RUNE_ACTIVATE\n");
 	local float best, old_rune;
 
 	// spawn_protect_off ();
@@ -794,7 +807,12 @@ Rune_Activate =
 		{
 			if (!self.aqflags & AQ_QUIET)
 			{
-				centerprint (self, "Rune Removed");
+				// if ((self.runetype == RN_DARK) && (self.runevar > 0))
+				self_sprint(self, "self.runetype = ");
+				self_sprint(self, ftos(self.runetype));
+				self_sprint(self, "\n");
+				centerprint (self, "Rune Removeddddddddddddddddd");
+
 				rune_tell_stop (1);
 			}
 			else
@@ -1020,6 +1038,7 @@ Rune_Activate =
 			self.ammo_cells = MAX_CELLS;
 		set_current_ammo ();
  	}
+	else if (self.runetype == RN_DARK) self.runevar = 0;
 
 	if (self.weapon == best)
 		set_weapon (W_BestWeapon ());
@@ -1029,8 +1048,16 @@ Rune_Activate =
 void (float tell)
 Rune_Delete =
 {
-	if (self.runetype) // && !(self.runetype == RN_SHIELD && self.runevar == 1))
+	if (self.runetype) {
+		// && !(self.runetype == RN_SHIELD && self.runevar == 1))
+		float current_runetype = self.runetype;
 		Rune_Activate (0, tell);
+		// self_sprint(self, "Rune_Delete after activate\n");
+		if(current_runetype == RN_DARK) {
+			Lights_on();
+			flash_off(self);
+		}
+	}
 };
 
 entity ()
@@ -1235,6 +1262,8 @@ Rune_Touch =
 		return;
 	}
 
+	// TEMPORARY
+	self.runetype = RN_DARK;
 	temp = self;
 	self = other;
 	Rune_Activate (temp.runetype, 1);

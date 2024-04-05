@@ -114,7 +114,7 @@ sound =
 /*
 	if (e.runetype != RN_CLOAK)
 		xsound (e, chan, samp, vol, atten);
-}; 
+};
 */
 
 void (entity e, float chan, string samp, float vol, float atten)
@@ -473,7 +473,7 @@ float (float include_qsmack) count_valid_players;
 
 void ()
 ghost_check =
-{	
+{
 	local entity e, os;
 
 	e = find (world, classname, "player");
@@ -1882,6 +1882,10 @@ player_init =
 		bprint (self.netname);
 		bprint (" connected to the server\n");
 
+		if(darkcount > 0){
+			flash_on(self);
+		}
+
 		//sprint_admin (PQ_Version ());
 		//bprint ("\n");
 
@@ -2182,7 +2186,7 @@ show_settings =
 		self_sprint (self, "lith");
 	else
 		self_sprint (self, "rune");
-	
+
 	self_sprint (self, " vote-hook   ");		self_sprint_boolean (self, !i);
 	self_sprint (self, "\n");
 };
@@ -2941,6 +2945,14 @@ draw_hud =
 		centerprint7 (self, "\n\n\n\n\n\n\n\n\n\n\n\n",
 				weap, "                 ", lithhook, willdrop, runedesc, s);
 		in_hud_hack = 0;
+		// self_sprint(self, "runetypeeee = ");
+		// self_sprint(self, ftos(self.runetype));
+		// self_sprint(self, "\n");
+				// if (self.runetype == RN_DARK)
+				// {
+				// 	Lights_on();
+				// }
+
 	}
 };
 

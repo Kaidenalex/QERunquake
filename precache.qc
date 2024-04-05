@@ -27,8 +27,8 @@ precaches =
 	//Missing precaches it seems:
 	precache_sound("items/health1.wav");
 	precache_sound ("items/protect.wav");
-	
-	
+
+
 	// blob/
 	precache_sound ("blob/death1.wav");		// unfrozen/unglued
 	precache_sound ("blob/hit1.wav");		// glue caught
@@ -229,4 +229,5 @@ precaches =
 
 	// settings.qc
 	precache_sound (SOUND_RUNE_PICKUP);		// you got a rune
+	precache_sound ("misc/secret.wav"); // For the darkness rune
 };

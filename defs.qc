@@ -408,13 +408,25 @@ string forced_nextmap;
 float update_frag_rates_time;
 
 // shootingstar mods
-.entity mydisc;
-.float discfired;
-.float bounced;
-.float disccount;
-.float disclanded;
-.float lastdmgtime;
-.vector lastknownvelocity;
+// .entity mydisc;
+// .float discfired;
+// .float bounced;
+// .float disccount;
+// .float disclanded;
+// .float lastdmgtime;
+// .vector lastknownvelocity;
+
+// darkness rune / flashlight
+.float flash_flag; // on/off for flashlight
+.entity flash; // flash entity
+
+//For Darkness Runes to keep track of how many active Darkness Runes
+float darkcount;
+.float darktemp;
+
+//darkness flag - if greater than zero all lights goes out
+//default equal zero - only ambient lighting goes out (torches, lamps, etc still lit)
+float darkflag;
 
 // If the map is custom, send message to players about downloading maps.
 float MAP_IS_CUSTOM;
@@ -479,12 +491,13 @@ float RN_DEFLECT	= 55;
 float RN_BETTY		= 56;
 float RN_TORNADO	= 57;
 float RN_REQUIEM	= 58;
-float RN_MAX		= 58;
+float RN_DARK       = 59;
+float RN_MAX		= 59;
 
 // Only partially runes.
 
-float RN_LITHIUM_HOOK	= 59;
-float RN_MAX_ALL	= 59;
+float RN_LITHIUM_HOOK	= 60;
+float RN_MAX_ALL	= 60;
 
 // impulses
 
