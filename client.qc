@@ -540,10 +540,6 @@ trigger_changelevel =
 void ()
 respawn =
 {
-	// if(self.classname == "player") {
-	// 	bprint(self.netname);
-	// 	bprint(" has respawned.\n");
-	// }
 	if(darkcount > 0) {
 		flash_on(self);
 	}
@@ -631,14 +627,10 @@ ClientKill =
      {
        Lights_on();
        if (self.flash_flag == TRUE)
-         //  ************************************************************************
-         //  mod for flashlight
-         //  turn off flashlight
        {
          self.flash_flag = FALSE;
          self.flash.think = SUB_Remove;
        }
-       //  ************************************************************************
      }
 
 	//if (dt == "suicide")

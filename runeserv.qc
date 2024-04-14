@@ -718,7 +718,6 @@ string (float ix) Rune_Model;
 void (float type, float tell)
 Rune_Activate =
 {
-	self_sprint(self, "RUNE_ACTIVATE\n");
 	local float best, old_rune;
 
 	// spawn_protect_off ();
@@ -807,11 +806,7 @@ Rune_Activate =
 		{
 			if (!self.aqflags & AQ_QUIET)
 			{
-				// if ((self.runetype == RN_DARK) && (self.runevar > 0))
-				self_sprint(self, "self.runetype = ");
-				self_sprint(self, ftos(self.runetype));
-				self_sprint(self, "\n");
-				centerprint (self, "Rune Removeddddddddddddddddd");
+				centerprint (self, "Rune Removed");
 
 				rune_tell_stop (1);
 			}
@@ -1049,10 +1044,8 @@ void (float tell)
 Rune_Delete =
 {
 	if (self.runetype) {
-		// && !(self.runetype == RN_SHIELD && self.runevar == 1))
 		float current_runetype = self.runetype;
 		Rune_Activate (0, tell);
-		// self_sprint(self, "Rune_Delete after activate\n");
 		if(current_runetype == RN_DARK) {
 			Lights_on();
 			flash_off(self);

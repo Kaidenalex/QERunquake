@@ -1,4 +1,3 @@
-// void() W_SetCurrentAmmo;
 void() flash_update =
 {
   // player is dead so turn off flashlight
@@ -23,8 +22,6 @@ void() flash_update =
   // set flashlights position
   setorigin (self, trace_endpos + (v_forward * -5));
 
-	// create_te_lightning (TE_LIGHTNING2, self.owner, self.owner.origin, trace_endpos);
-
   // repeat in 0.02 seconds...
   self.nextthink = time + 0.02;
 };
@@ -37,9 +34,6 @@ void(entity targ) flash_on =
     existing.nextthink = time + 0.01;
   }
 
-  bprint("Assigning flashlight to ");
-  bprint(targ.netname);
-  bprint("\n");
   // make a new entity to hold the flashlight
   local entity myflash;
 
@@ -71,46 +65,9 @@ void(entity targ) flash_on =
   myflash.think = flash_update;
   myflash.nextthink = time + 0.02;
 };
-/*
-void() flash_on =
-{
-  // make a new entity to hold the flashlight
-  local entity myflash;
-
-  // spawn flash
-  myflash = spawn();
-  myflash.movetype = MOVETYPE_NONE;
-  myflash.solid = SOLID_NOT;
-
-  // this uses the s_bubble.spr, if you want it to be completely
-  // invisible you need to create a one pixel tranceparent spririt
-  // and use it here...
-  setmodel (myflash, "progs/s_bubble.spr");
-  setsize (myflash, '0 0 0', '0 0 0');
-
-  // wire player and flashlight together
-  myflash.owner = self;
-  self.flash = myflash;
-
-  // give the flash a name and make it glow
-  myflash.classname = "flash";
-  myflash.effects = EF_DIMLIGHT;
-
-  // set start position
-  makevectors (self.v_angle);
-  traceline (self.origin, (self.origin + (v_forward * 500)), FALSE, self);
-  setorigin (myflash, trace_endpos);
-
-  // start flashlight update
-  myflash.think = flash_update;
-  myflash.nextthink = time + 0.02;
-};
-*/
 
 void(entity targ) flash_toggle =
 {
-  // activated by impulse 101. see weapons.qc
-
   // if off, turn on
   if (targ.flash_flag == FALSE)
   {
@@ -140,20 +97,6 @@ void(entity targ) flash_off =
     targ.flash.nextthink = time + 0.1;
   }
 };
-
-// original
-/*
-void() flash_off =
-{
-  self.flash_flag = FALSE;
-  W_SetCurrentAmmo ();
-  self.flash.think = SUB_Remove;
-  self.flash.nextthink = time + 0.1;
-};
-*/
-
-//  *********************************************************************************************
-//  Light functions for Rune of Darkness
 
 void () Darkflag_one =
 {
@@ -222,73 +165,39 @@ void () Lights_off =
   bprint("\n");
   if (darkcount > 0)
   {
-    // TEMP TEMP TEMP
-    // TEMP TEMP TEMP
-    // TEMP TEMP TEMP
-    // TEMP TEMP TEMP
-    // TEMP TEMP TEMP
-    // TEMP TEMP TEMP
     local entity head;
 
-    // selected = world;
     head = findradius(self.origin, 9999999);
-    while (head) //if we found someone, then continue
+    while (head)
     {
       if (head != world && head.health > 0 && head.classname == "player" && head != self)
       {
-        // spawn_tdeath (head.origin, self);
-        // bprint("assigning flashlight to ");
-        // bprint(head.netname);
-        // bprint("\n");
-        // flash_toggle(head);
         flash_on(head);
       }
-      head = head.chain;  //if head is 1 (found someone), loop back,  If 0,
-      //quit...
+      head = head.chain;
     }
-    // TEMP TEMP TEMP
-  //////////////////////////
-
     lightstyle(world.style, "a");
-    // original
-    if (darkflag > 0)
-    {
-      Darkflag_one();
-    }
-    else
-    {
-      Darkflag_zero();
-    }
-      // Darkflag_one();
+
+    Darkflag_one();
   }
 };
 
 void () Lights_on =
 {
   darkcount = darkcount - 1;
-  bprint("darkcount = ");
-  bprint(ftos(darkcount));
-  bprint("\n");
   if (darkcount < 1)
   {
     // Turn off everyone's flashlight
     local entity head;
 
-    // selected = world;
     head = findradius(self.origin, 9999999);
-    while (head) //if we found someone, then continue
+    while (head)
     {
       if (head != world && head.health > 0 && head.classname == "player" && head != self)
       {
-        // spawn_tdeath (head.origin, self);
-        // bprint("Turning off flashlight for ");
-        // bprint(head.netname);
-        // bprint("\n");
-        // flash_toggle(head);
         flash_off(head);
       }
-      head = head.chain;  //if head is 1 (found someone), loop back,  If 0,
-      //quit...
+      head = head.chain;
     }
 
     lightstyle(world.style, "m");
@@ -301,27 +210,10 @@ void () Dark_off =
 {
   if ((self.runetype == RN_DARK) && (self.runevar > 0))
   {
-    //                if (self.runevar > 0)
-    //                {
-    //  ************************************************************************
-    //  turns lights back on
     Lights_on();
-
-
-
-
-
-    //  ************************************************************************
-
-    //  ************************************************************************
-    //  mod for flashlight
-    //  turn off flashlight
     self.flash_flag = FALSE;
     self.flash.think = SUB_Remove;
-    //                flash_off();
     centerprint(self, "20 Seconds to Recharge");
-    //  ************************************************************************
-    //                }
   }
 };
 
@@ -339,29 +231,23 @@ void() Dark_Think =
 
 void() Rune_Dark =
 {
+  if(darkcount > 0 && self.runevar == 0) {
+    centerprint(self, "World is already dark!");
+    return;
+  }
   local string timeleft;
   if (self.runevar > 0)
   {
     if (self.flash_flag == TRUE)
-
-      //  ************************************************************************
-      //  mod for flashlight
-      //  turn off flashlight
     {
       self.flash_flag = FALSE;
       self.flash.think = SUB_Remove;
     }
-    //  ************************************************************************
 
     else if (self.flash_flag == FALSE)
     {
-      //  ************************************************************************
-      //  mod for flashlight
-      //  turn on flashlight
       self.flash_flag = TRUE;
       flash_on(self);
-      //  ************************************************************************
-
     }
   }
   if (self.runevar < 1)
@@ -370,8 +256,6 @@ void() Rune_Dark =
     {
       centerprint(self, "Light Absorbers Recharging.");
       timeleft = ftos(self.runetime - time);
-      // sprint(self,PRINT_HIGH, ftos(timeleft));
-      // sprint(self,PRINT_HIGH, " seconds to recharge\n");
       self_sprint(self, timeleft);
       self_sprint(self, " seconds to recharge\n");
       return;
@@ -380,21 +264,12 @@ void() Rune_Dark =
     self.runevar = 1;
     centerprint (self, "20 Seconds of Darkness");
     self.runetime = time + 20;
-    //  ************************************************************************
-    //  turns lights off
     Lights_off();
 
-
-
-    //  ************************************************************************
     if (self.flash_flag == FALSE)
     {
-      //  ************************************************************************
-      //  mod for flashlight
-      //  turn on flashlight
       self.flash_flag = TRUE;
       flash_on(self);
-      //  ************************************************************************
     }
     return;
   }
