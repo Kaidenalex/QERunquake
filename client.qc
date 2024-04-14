@@ -2238,7 +2238,6 @@ ClientObituary =
 
 			if (dt == "suicide") {
 				bprint (" suicides\n");
-				traceon();
 
 			}
 			else if (dt == "trapavoid")
