@@ -934,6 +934,11 @@ float	FL_ONGROUND			= 512;	// standing on something
 float	FL_PARTIALGROUND		= 1024;	// not all corners are valid
 float	FL_WATERJUMP			= 2048;	// player jumping out of water
 float	FL_JUMPRELEASED			= 4096;	// for jump debouncing
+float 	FL_ISBOT     			= 8192; 	// mal: this will be set on bot players
+float 	FL_NO_PLAYERS			= 16384;	// mal: used by the spawn point editor
+float 	FL_NO_MONSTERS			= 32768;	// mal: used by the spawn point editor
+float   FL_NO_BOTS				= 65536;	// mal: any item marked with this will be ignored by bots.
+float 	FL_OBJECTIVE			= 131072; 	// mal: any item marked with this is an objective of some kind.
 
 // requires manquake dedicated server
 float	FL_LOW_BANDWIDTH_CLIENT		= 8192;	// don't draw ents with EF_MAYBE_DRAW
@@ -1715,3 +1720,4 @@ entity	last_teleport;
 float	gamemode_set;
 float	console_warp;
 
+.float botrunethink

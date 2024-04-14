@@ -33,6 +33,8 @@ runes60.qc
 runes70.qc
 runeserv.qc
 
+bot.qc
+
 admin.qc
 bfg.qc
 bomb.qc
