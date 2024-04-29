@@ -225,3 +225,32 @@ monster_tarbaby =
 
 	walkmonster_start ();
 };
+
+// 1 is normal, 2 is helper
+void (float type)
+monster_tarbaby_1 =
+{
+	self.solid	= SOLID_SLIDEBOX;
+	self.touch	= misc_touch;
+	self.movetype	= MOVETYPE_STEP;
+
+	setmodel (self, "progs/tarbaby.mdl");
+	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
+
+	if (type == 1)
+		self.max_health = 600;
+	else
+		self.max_health = 400;
+
+	self.health	= self.max_health;
+
+	self.th_stand	= tbaby_stand1;
+	self.th_walk	= tbaby_walk1;
+	self.th_run	= tbaby_run1;
+	self.th_die	= tbaby_die;
+	self.th_melee	= tbaby_melee;
+	self.th_missile	= tbaby_magic1;
+	self.th_pain	= tbaby_pain;
+
+	walkmonster_start ();
+};
