@@ -1669,3 +1669,5 @@ void () zombie_die;
 void (entity attacker, float take) zombie_pain;
 void () monster_zombie;
 void (float type) monster_zombie_1;
+void (float type) monster_tarbaby_1;
+void () Rune_TarThink
