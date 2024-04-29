@@ -1671,3 +1671,9 @@ void () monster_zombie;
 void (float type) monster_zombie_1;
 void (float type) monster_tarbaby_1;
 void () Rune_TarThink;
+void () tbaby_jump1
+void () tbaby_jump5
+void () tbaby_die
+void () tbaby_melee
+void () tbaby_magic1
+void () tbaby_pain

@@ -76,7 +76,7 @@ shambler.qc
 //nomonster dog.qc
 zombie.qc
 //nomonster boss.qc
-//nomonster tarbaby.qc		// registered
+tarbaby.qc
 //nomonster hknight.qc		// registered
 //nomonster fish.qc		    // registered
 //nomonster shalrath.qc		// registered
