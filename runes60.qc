@@ -989,3 +989,52 @@ Rune_Tornado =
 	makevectors (self.angles);
 	tornado.velocity	= (v_forward * 250) + (v_up * 250);
 };
+
+void()
+Rune_Slimer =
+{
+
+};
+
+void()
+Rune_Slimer_Spawn =
+{
+	local entity tar;
+	local entity temp;
+	local entity tarctrl;
+
+	tar			= spawn ();
+	self.runent		= tar;
+
+	tar.classname		= "tarbaby_slave";
+	tar.owner		= self;
+	tar.runevar		= 0;
+	tar.flags		= tar.flags | FL_MONSTER;
+	tar.movetarget		= self;
+	tar.angles		= self.pos1 = self.angles;
+	tar.fixangle		= 1;
+
+	setorigin (tar, self.origin);
+	spawn_tfog (sham.origin);
+
+	temp			= self;
+	self			= tar;
+	monster_tarbaby_1 (0);
+	self			= temp;
+
+	tarctrl		= spawn ();
+	tarctrl.solid		= SOLID_NOT;
+	tarctrl.movetype	= MOVETYPE_FLY;
+
+	setorigin (tarctrl, self.origin);
+	setsize (tarctrl, VEC_ORIGIN, VEC_ORIGIN);
+
+	tartrl.classname	= "tarbaby_control";
+	tarctrl.owner		= self;
+	tarctrl.runent		= sham;
+	tarctrl.runevar	= 0;
+	tarctrl.nextthink	= time + 1;
+	tarctrl.think		= Rune_TarThink;
+
+	tar.trigger_field	= tarctrl;
+};
