@@ -29,5 +29,4 @@ void () monster_knight		= { remove (self); };
 void () monster_ogre		= { remove (self); };
 void () monster_oldone		= { remove (self); };
 void () monster_shalrath	= { remove (self); };
-void () monster_tarbaby		= { remove (self); };
 void () monster_wizard		= { remove (self); };

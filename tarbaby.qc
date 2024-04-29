@@ -247,10 +247,6 @@ monster_tarbaby_1 =
 	self.th_stand	= tbaby_stand1;
 	self.th_walk	= tbaby_walk1;
 	self.th_run	= tbaby_run1;
-	self.th_die	= tbaby_die;
-	self.th_melee	= tbaby_melee;
-	self.th_missile	= tbaby_magic1;
-	self.th_pain	= tbaby_pain;
 
 	walkmonster_start ();
 };
