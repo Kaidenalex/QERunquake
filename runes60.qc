@@ -1038,3 +1038,9 @@ Rune_Slimer_Spawn =
 
 	tar.trigger_field	= tarctrl;
 };
+
+void()
+Rune_TarThink =
+{
+
+};
