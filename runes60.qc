@@ -1015,7 +1015,7 @@ Rune_Slimer_Spawn =
 	tar.fixangle		= 1;
 
 	setorigin (tar, self.origin);
-	spawn_tfog (sham.origin);
+	spawn_tfog (tar.origin);
 
 	temp			= self;
 	self			= tar;
@@ -1029,9 +1029,9 @@ Rune_Slimer_Spawn =
 	setorigin (tarctrl, self.origin);
 	setsize (tarctrl, VEC_ORIGIN, VEC_ORIGIN);
 
-	tartrl.classname	= "tarbaby_control";
+	tarctrl.classname	= "tarbaby_control";
 	tarctrl.owner		= self;
-	tarctrl.runent		= sham;
+	tarctrl.runent		= tar;
 	tarctrl.runevar	= 0;
 	tarctrl.nextthink	= time + 1;
 	tarctrl.think		= Rune_TarThink;
